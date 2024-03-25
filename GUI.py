@@ -8,7 +8,7 @@ root = Tk()
 
 # Set the window title and size
 root.title("Question Paper Generator")
-root.geometry('1080x720')
+root.geometry('1080x920')
 
 # Global variables to store inputs
 subject_name = ""
@@ -21,11 +21,13 @@ output_docx_filled_path = ""
 
 # Function to update global variables with input values
 def get_inputs():
-    global subject_name, sub_code, Paper_code, weightage
+    global subject_name, sub_code, Paper_code, weightage,Month_Year,Semester
     subject_name = subject_name_entry.get()
     sub_code = sub_code_entry.get()
     Paper_code = Paper_code_entry.get()
     weightage=  int(no_of_questions.get())
+    Month_Year=Month_Year.get()
+    Semester=Semester.get()
 
 # Callback function to open file dialog
 def openFile():
@@ -60,8 +62,8 @@ def ca1_paper_callback():
 # Callback function to generate question paper for CA2
 def ca2_paper_callback():
     get_inputs()
-    ca2_paper(path, "output_questions.docx", Paper_code, subject_name, sub_code,weightage)
-    ca2_paper(path, "output_questions_filled.docx", Paper_code, subject_name, sub_code,weightage)
+    ca2_paper(path, "output_questions.docx", Paper_code, subject_name, sub_code,weightage,Month_Year,Semester)
+    ca2_paper(path, "output_questions_filled.docx", Paper_code, subject_name, sub_code,weightage,Month_Year,Semester)
     # Update the global variables with the paths of the generated documents
     global output_docx_path, output_docx_filled_path
     output_docx_path = "output_questions.docx"
@@ -102,6 +104,16 @@ no_of_questions = Label(root, text='Enter the weightage of the first unit (Part-
 no_of_questions.pack(pady=10)
 no_of_questions = Entry(root, font=("Helvetica", 16))
 no_of_questions.pack(pady=5)
+
+Month_Year = Label(root, text='Month _ Year :', font=("Helvetica", 16))
+Month_Year.pack(pady=10)
+Month_Year = Entry(root, font=("Helvetica", 16))
+Month_Year.pack(pady=5)
+
+Semester = Label(root, text='Semester :', font=("Helvetica", 16))
+Semester.pack(pady=10)
+Semester = Entry(root, font=("Helvetica", 16))
+Semester.pack(pady=5)
 
 generate_label = Label(root, text='Which format of the question paper do you want?', font=("Helvetica", 24))
 generate_label.pack(pady=20)
