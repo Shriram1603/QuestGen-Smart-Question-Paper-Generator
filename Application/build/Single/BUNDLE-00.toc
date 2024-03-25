@@ -1,0 +1,3 @@
+([('Single',
+   '/Users/shriram.s.s/Documents/Documents/Projects/question/Application/dist/Single',
+   'EXECUTABLE')],)
