@@ -8,7 +8,7 @@ root = Tk()
 
 # Set the window title and size
 root.title("Question Paper Generator")
-root.geometry('1080x920')
+root.geometry('1080x1080')
 
 # Global variables to store inputs
 subject_name = ""
@@ -55,13 +55,13 @@ def Unit5():
     else:
         end=8
 def get_inputs():
-    global subject_name, sub_code, Paper_code, weightage,Month_Year,Semester
+    global subject_name, sub_code, Paper_code, weightage,MonthYear,semester
     subject_name = subject_name_entry.get()
     sub_code = sub_code_entry.get()
     Paper_code = Paper_code_entry.get()
     weightage=  int(no_of_questions.get())
-    Month_Year=Month_Year.get()
-    Semester=Semester.get()
+    MonthYear=Month_Year.get()
+    semester=Semester.get()
 
 # Callback function to open file dialog
 def openFile():
@@ -72,8 +72,8 @@ def openFile():
 # Callback function to generate question paper for Semester/Model
 def sem_button_callback():
     get_inputs()
-    sem_paper(path, "output_questions.docx", Paper_code, subject_name, sub_code)
-    sem_paper(path, "output_questions_filled.docx", Paper_code, subject_name, sub_code)
+    sem_paper(path, "output_questions.docx", Paper_code, subject_name, sub_code,MonthYear,semester)
+    sem_paper(path, "output_questions_filled.docx", Paper_code, subject_name, sub_code,MonthYear,semester)
     # Update the global variables with the paths of the generated documents
     global output_docx_path, output_docx_filled_path
     output_docx_path = "output_questions.docx"
@@ -82,16 +82,16 @@ def sem_button_callback():
     open_generated_docx()
 
 # Callback function to generate question paper for CA1
-def ca1_paper_callback():
-    get_inputs()
-    ca1_paper(path, "output_questions.docx", Paper_code, subject_name, sub_code,weightage)
-    ca1_paper(path, "output_questions_filled.docx", Paper_code, subject_name, sub_code,weightage)
-    # Update the global variables with the paths of the generated documents
-    global output_docx_path, output_docx_filled_path
-    output_docx_path = "output_questions.docx"
-    output_docx_filled_path = "output_questions_filled.docx"
-    # Open the generated documents
-    open_generated_docx()
+# def ca1_paper_callback():
+#     get_inputs()
+#     ca1_paper(path, "output_questions.docx", Paper_code, subject_name, sub_code,weightage)
+#     ca1_paper(path, "output_questions_filled.docx", Paper_code, subject_name, sub_code,weightage)
+#     # Update the global variables with the paths of the generated documents
+#     global output_docx_path, output_docx_filled_path
+#     output_docx_path = "output_questions.docx"
+#     output_docx_filled_path = "output_questions_filled.docx"
+#     # Open the generated documents
+#     open_generated_docx()
 
 # Callback function to generate question paper for CA2
 def ca2_paper_callback():
@@ -149,33 +149,43 @@ Semester.pack(pady=10)
 Semester = Entry(root, font=("Helvetica", 16))
 Semester.pack(pady=5)
 
+
 label = Label(root, text='Choose unit :', font=("Helvetica", 24))
 label.pack(pady=20)
 
-Unit1_button = Button(root, text='Unit 1', font=("Helvetica", 24), command=Unit1)
+Unit_buttons_frame = Frame(root)
+Unit_buttons_frame.pack()
+
+Unit1_button = Button(Unit_buttons_frame, text='Unit 1', font=("Helvetica", 24), command=Unit1)
 Unit1_button.pack(side='left', padx=10, pady=20)
 
-Unit2_button = Button(root, text='Unit 2', font=("Helvetica", 24), command=Unit2)
+Unit2_button = Button(Unit_buttons_frame, text='Unit 2', font=("Helvetica", 24), command=Unit2)
 Unit2_button.pack(side='left', padx=10, pady=20)
 
-Unit3_button = Button(root, text='Unit 3', font=("Helvetica", 24), command=Unit3)
+Unit3_button = Button(Unit_buttons_frame, text='Unit 3', font=("Helvetica", 24), command=Unit3)
 Unit3_button.pack(side='left', padx=10, pady=20)
 
-Unit4_button = Button(root, text='Unit 4', font=("Helvetica", 24), command=Unit4)
+Unit4_button = Button(Unit_buttons_frame, text='Unit 4', font=("Helvetica", 24), command=Unit4)
 Unit4_button.pack(side='left', padx=10, pady=20)
 
-Unit5_button = Button(root, text='Unit 5', font=("Helvetica", 24), command=Unit5)
+Unit5_button = Button(Unit_buttons_frame, text='Unit 5', font=("Helvetica", 24), command=Unit5)
 Unit5_button.pack(side='left', padx=10, pady=20)
 
+# Create space between the two sections
+space_frame = Frame(root)
+space_frame.pack(pady=20)
 
 generate_label = Label(root, text='Which format of the question paper do you want?', font=("Helvetica", 24))
-generate_label.pack(pady=20)
+generate_label.pack()
 
 sem_button = Button(root, text='Semester/Model', font=("Helvetica", 24), command=sem_button_callback)
-ca2_button = Button(root, text='Generate questions for the units you clicked', font=("Helvetica", 24), command=ca2_paper_callback)
 
-sem_button.pack(side='left', padx=10, pady=20)
-ca2_button.pack(side='left', padx=10, pady=20)
+
+ca2_button = Button(root, text='Generate questions for the units you clicked', font=("Helvetica", 24), command=ca2_paper_callback)
+sem_button.pack(side='left', padx=40, pady=20, anchor='center')
+ca2_button.pack(side='left', padx=10, pady=20, anchor='center')
+
+
 
 # Run the Tkinter event loop
 root.mainloop()
