@@ -1,4 +1,4 @@
-from main import sem_paper, ca1_paper, ca2_paper
+from main import sem_paper, ca2_paper
 from tkinter import *
 from tkinter import filedialog
 import os
@@ -18,8 +18,42 @@ no_of_questions=0
 # Global variable to store the path of the generated documents
 output_docx_path = ""
 output_docx_filled_path = ""
+global start,end
+start=-1
+end=-1
 
 # Function to update global variables with input values
+def Unit1():
+    global start,end
+    if(start==-1):
+        start=0
+    else:
+        end=0
+    
+def Unit2():
+    global start,end
+    if(start==-1):
+        start=2
+    else:
+        end=2
+def Unit3():
+    global start,end
+    if(start==-1):
+        start=4
+    else:
+        end=4
+def Unit4():
+    global start,end
+    if(start==-1):
+        start=6
+    else:
+        end=6
+def Unit5():
+    global start,end
+    if(start==-1):
+        start=8
+    else:
+        end=8
 def get_inputs():
     global subject_name, sub_code, Paper_code, weightage,Month_Year,Semester
     subject_name = subject_name_entry.get()
@@ -62,8 +96,8 @@ def ca1_paper_callback():
 # Callback function to generate question paper for CA2
 def ca2_paper_callback():
     get_inputs()
-    ca2_paper(path, "output_questions.docx", Paper_code, subject_name, sub_code,weightage,Month_Year,Semester)
-    ca2_paper(path, "output_questions_filled.docx", Paper_code, subject_name, sub_code,weightage,Month_Year,Semester)
+    ca2_paper(path, "output_questions.docx", Paper_code, subject_name, sub_code,weightage,Month_Year,Semester,start,end)
+    ca2_paper(path, "output_questions_filled.docx", Paper_code, subject_name, sub_code,weightage,Month_Year,Semester,start,end)
     # Update the global variables with the paths of the generated documents
     global output_docx_path, output_docx_filled_path
     output_docx_path = "output_questions.docx"
@@ -115,15 +149,33 @@ Semester.pack(pady=10)
 Semester = Entry(root, font=("Helvetica", 16))
 Semester.pack(pady=5)
 
+label = Label(root, text='Choose unit :', font=("Helvetica", 24))
+label.pack(pady=20)
+
+Unit1_button = Button(root, text='Unit 1', font=("Helvetica", 24), command=Unit1)
+Unit1_button.pack(side='left', padx=10, pady=20)
+
+Unit2_button = Button(root, text='Unit 2', font=("Helvetica", 24), command=Unit2)
+Unit2_button.pack(side='left', padx=10, pady=20)
+
+Unit3_button = Button(root, text='Unit 3', font=("Helvetica", 24), command=Unit3)
+Unit3_button.pack(side='left', padx=10, pady=20)
+
+Unit4_button = Button(root, text='Unit 4', font=("Helvetica", 24), command=Unit4)
+Unit4_button.pack(side='left', padx=10, pady=20)
+
+Unit5_button = Button(root, text='Unit 5', font=("Helvetica", 24), command=Unit5)
+Unit5_button.pack(side='left', padx=10, pady=20)
+
+
 generate_label = Label(root, text='Which format of the question paper do you want?', font=("Helvetica", 24))
 generate_label.pack(pady=20)
 
 sem_button = Button(root, text='Semester/Model', font=("Helvetica", 24), command=sem_button_callback)
-ca1_button = Button(root, text='CA1', font=("Helvetica", 24), command=ca1_paper_callback)
-ca2_button = Button(root, text='CA2', font=("Helvetica", 24), command=ca2_paper_callback)
-sem_button.pack(pady=20)
-ca1_button.pack(pady=20)
-ca2_button.pack(pady=20)
+ca2_button = Button(root, text='Generate questions for the units you clicked', font=("Helvetica", 24), command=ca2_paper_callback)
+
+sem_button.pack(side='left', padx=10, pady=20)
+ca2_button.pack(side='left', padx=10, pady=20)
 
 # Run the Tkinter event loop
 root.mainloop()
