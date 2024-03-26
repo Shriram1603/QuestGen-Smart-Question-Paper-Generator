@@ -6,6 +6,7 @@ from docx.shared import Cm
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 from tkinter import filedialog
 import os
+import sys
 
 
 
@@ -117,13 +118,23 @@ def sem_paper(input_docx, output_docx,Paper_code,subject_name,subject_code,Month
     paragraph = new_doc.add_paragraph()
     paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
     run = paragraph.add_run()
-    run.add_picture('./assets/Picture 1.jpg', width=Cm(5.66), height=Cm(1.88))
+
+        # Determine the path to the assets directory
+    if getattr(sys, 'frozen', False):
+        # If the application is frozen (i.e., running as a bundled executable)
+        assets_dir = os.path.join(sys._MEIPASS, 'assets')
+    else:
+        # If running in a normal Python environment
+        assets_dir = './assets'
+
+
+    run.add_picture(os.path.join(assets_dir, 'Picture1.jpg'), width=Cm(5.66), height=Cm(1.88))
 
     # Add a tab character to separate the first and second images
     run.add_text('\t\t\t')
 
     # Add the second image aligned to the right
-    run.add_picture('./assets/reg.png', width=Cm(10), height=Cm(1.80))
+    run.add_picture(os.path.join(assets_dir, 'reg.png'), width=Cm(10), height=Cm(1.80))
 
     # Add document content with font size set to 20 points
     new_doc.add_paragraph(f"Question Paper Code: {Paper_code}", style='BodyText').alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
@@ -365,13 +376,24 @@ def ca2_paper(input_docx, output_docx, Paper_code, subject_name, subject_code, n
     paragraph = new_doc.add_paragraph()
     paragraph.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT
     run = paragraph.add_run()
-    run.add_picture('./assets/Picture 1.jpg', width=Cm(5.66), height=Cm(1.88))
+    
+       # Determine the path to the assets directory
+    if getattr(sys, 'frozen', False):
+        # If the application is frozen (i.e., running as a bundled executable)
+        assets_dir = os.path.join(sys._MEIPASS, 'assets')
+    else:
+        # If running in a normal Python environment
+        assets_dir = './assets'
+
+
+    run.add_picture(os.path.join(assets_dir, 'Picture1.jpg'), width=Cm(5.66), height=Cm(1.88))
 
     # Add a tab character to separate the first and second images
     run.add_text('\t\t\t')
 
     # Add the second image aligned to the right
-    run.add_picture('./assets/reg.png', width=Cm(10), height=Cm(1.80))
+    run.add_picture(os.path.join(assets_dir, 'reg.png'), width=Cm(10), height=Cm(1.80))
+
 
     # Add document content with font size set to 20 points
     new_doc.add_paragraph(f"Question Paper Code: {Paper_code}", style='BodyText').alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
@@ -478,7 +500,7 @@ root = Tk()
 
 # Set the window title and size
 root.title("Question Paper Generator")
-root.geometry('1080x1080')
+root.geometry('1920x1920')
 
 # Global variables to store inputs
 subject_name = ""
@@ -584,78 +606,72 @@ def open_generated_docx():
 
 # Create and pack the widgets
 label = Label(root, text='Select the formatted question bank', font=("Helvetica", 24))
-label.pack(pady=20)
+label.grid(row=0, column=0, columnspan=2, pady=20)
 
 button = Button(root, text='Open File', command=openFile)
-button.pack(pady=20)
+button.grid(row=1, column=0, columnspan=2, pady=20)
 
 subject_name_label = Label(root, text='Enter Subject Name:', font=("Helvetica", 16))
-subject_name_label.pack(pady=10)
+subject_name_label.grid(row=2, column=0, pady=(20, 5), sticky='w')
 subject_name_entry = Entry(root, font=("Helvetica", 16))
-subject_name_entry.pack(pady=5)
+subject_name_entry.grid(row=2, column=1, pady=(20, 5), sticky='w')
 
 sub_code_label = Label(root, text='Enter Subject Code:', font=("Helvetica", 16))
-sub_code_label.pack(pady=10)
+sub_code_label.grid(row=3, column=0, pady=(20, 5), sticky='w')
 sub_code_entry = Entry(root, font=("Helvetica", 16))
-sub_code_entry.pack(pady=5)
+sub_code_entry.grid(row=3, column=1, pady=(20, 5), sticky='w')
 
 Paper_code_label = Label(root, text='Enter Paper Code:', font=("Helvetica", 16))
-Paper_code_label.pack(pady=10)
+Paper_code_label.grid(row=4, column=0, pady=(20, 5), sticky='w')
 Paper_code_entry = Entry(root, font=("Helvetica", 16))
-Paper_code_entry.pack(pady=5)
+Paper_code_entry.grid(row=4, column=1, pady=(20, 5), sticky='w')
 
-no_of_questions = Label(root, text='Enter the weightage of the first unit (Part-A):', font=("Helvetica", 16))
-no_of_questions.pack(pady=10)
+no_of_questions_label = Label(root, text='Enter the weightage of the first unit (Part-A):', font=("Helvetica", 16))
+no_of_questions_label.grid(row=5, column=0, pady=(20, 5), sticky='w')
 no_of_questions = Entry(root, font=("Helvetica", 16))
-no_of_questions.pack(pady=5)
+no_of_questions.grid(row=5, column=1, pady=(20, 5), sticky='w')
 
-Month_Year = Label(root, text='Month _ Year :', font=("Helvetica", 16))
-Month_Year.pack(pady=10)
+Month_Year_label = Label(root, text='Month _ Year :', font=("Helvetica", 16))
+Month_Year_label.grid(row=6, column=0, pady=(20, 5), sticky='w')
 Month_Year = Entry(root, font=("Helvetica", 16))
-Month_Year.pack(pady=5)
+Month_Year.grid(row=6, column=1, pady=(20, 5), sticky='w')
 
-Semester = Label(root, text='Semester :', font=("Helvetica", 16))
-Semester.pack(pady=10)
+Semester_label = Label(root, text='Semester :', font=("Helvetica", 16))
+Semester_label.grid(row=7, column=0, pady=(20, 5), sticky='w')
 Semester = Entry(root, font=("Helvetica", 16))
-Semester.pack(pady=5)
+Semester.grid(row=7, column=1, pady=(20, 5), sticky='w')
 
 
-label = Label(root, text='Choose unit :', font=("Helvetica", 24))
-label.pack(pady=20)
 
 Unit_buttons_frame = Frame(root)
-Unit_buttons_frame.pack()
+Unit_buttons_frame.grid(row=9, column=0, columnspan=5, pady=(0, 20))
+
+label = Label(root, text='Choose unit :', font=("Helvetica", 24))
+label.grid(row=0, column=0, padx=10,pady=20,)
 
 Unit1_button = Button(Unit_buttons_frame, text='Unit 1', font=("Helvetica", 24), command=Unit1)
-Unit1_button.pack(side='left', padx=10, pady=20)
+Unit1_button.grid(row=0, column=1, padx=10, pady=20)
 
 Unit2_button = Button(Unit_buttons_frame, text='Unit 2', font=("Helvetica", 24), command=Unit2)
-Unit2_button.pack(side='left', padx=10, pady=20)
+Unit2_button.grid(row=0, column=2, padx=10, pady=20)
 
 Unit3_button = Button(Unit_buttons_frame, text='Unit 3', font=("Helvetica", 24), command=Unit3)
-Unit3_button.pack(side='left', padx=10, pady=20)
+Unit3_button.grid(row=0, column=3, padx=10, pady=20)
 
 Unit4_button = Button(Unit_buttons_frame, text='Unit 4', font=("Helvetica", 24), command=Unit4)
-Unit4_button.pack(side='left', padx=10, pady=20)
+Unit4_button.grid(row=0, column=4, padx=10, pady=20)
 
 Unit5_button = Button(Unit_buttons_frame, text='Unit 5', font=("Helvetica", 24), command=Unit5)
-Unit5_button.pack(side='left', padx=10, pady=20)
-
-# Create space between the two sections
-space_frame = Frame(root)
-space_frame.pack(pady=20)
+Unit5_button.grid(row=0, column=5, padx=10, pady=20)
 
 generate_label = Label(root, text='Which format of the question paper do you want?', font=("Helvetica", 24))
-generate_label.pack()
+generate_label.grid(row=10, column=0, columnspan=5, pady=(20, 10))
 
 sem_button = Button(root, text='Semester/Model', font=("Helvetica", 24), command=sem_button_callback)
+sem_button.grid(row=11, column=0, columnspan=2, padx=10, pady=20)
 
-
-ca2_button = Button(root, text='Generate questions for the units you clicked', font=("Helvetica", 24), command=ca2_paper_callback)
-sem_button.pack(side='left', padx=40, pady=20, anchor='center')
-ca2_button.pack(side='left', padx=10, pady=20, anchor='center')
-
-
+ca2_button = Button(root, text='Generate CA question', font=("Helvetica", 24), command=ca2_paper_callback)
+ca2_button.grid(row=11, column=3, columnspan=2,padx=10, pady=45)
 
 # Run the Tkinter event loop
 root.mainloop()
