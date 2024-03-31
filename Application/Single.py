@@ -884,30 +884,6 @@ from tkinter import *
 from tkinter import filedialog
 import os
 
-# Create a Tkinter instance
-root = Tk()
-
-# Set the window title
-root.title("Question Paper Generator")
-
-# Create a Canvas widget
-canvas = Canvas(root)
-canvas.pack(side=LEFT, fill="both", expand=True)
-
-# Add a scrollbar
-scrollbar = Scrollbar(root, orient="vertical", command=canvas.yview)
-scrollbar.pack(side=RIGHT, fill="y")
-
-# Configure the canvas
-canvas.configure(yscrollcommand=scrollbar.set)
-canvas.bind("<Configure>", lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
-
-# Create a frame inside the canvas to hold the widgets
-frame = Frame(canvas)
-
-# Add the frame to the canvas
-canvas.create_window((0, 0), window=frame, anchor="nw")
-
 # Global variables to store inputs
 subject_name = ""
 sub_code = ""
@@ -1049,85 +1025,88 @@ def open_generated_docx():
     if output_docx_filled_path:
         os.system(f'open "{output_docx_filled_path}"')
 
-# Create and pack the widgets
-label = Label(frame, text='Select the formatted question bank', font=("Helvetica", 18))
-label.pack(pady=10)
+# Create a Tkinter instance
+root = Tk()
 
-button = Button(frame, text='Open File', command=openFile)
-button.pack(pady=10)
+# Set the window title
+root.title("Question Paper Generator")
 
-subject_name_label = Label(frame, text='Enter Subject Name:', font=("Helvetica", 14))
-subject_name_label.pack(pady=5)
-subject_name_entry = Entry(frame, font=("Helvetica", 14))
-subject_name_entry.pack(pady=5)
+# Create a Frame to hold all the widgets
+frame = Frame(root)
+frame.pack(padx=20, pady=20)
 
-sub_code_label = Label(frame, text='Enter Subject Code:', font=("Helvetica", 14))
-sub_code_label.pack(pady=5)
-sub_code_entry = Entry(frame, font=("Helvetica", 14))
-sub_code_entry.pack(pady=5)
+# Widgets with updated styles
+label = Label(frame, text='Select the formatted question bank', font=("Arial", 14))
+label.grid(row=0, column=0, columnspan=2, pady=10)
 
-Paper_code_label = Label(frame, text='Enter Paper Code:', font=("Helvetica", 14))
-Paper_code_label.pack(pady=5)
-Paper_code_entry = Entry(frame, font=("Helvetica", 14))
-Paper_code_entry.pack(pady=5)
+button = Button(frame, text='Open File', font=("Arial", 12), command=openFile)
+button.grid(row=1, column=0, columnspan=2, pady=5)
 
-no_of_questions_label = Label(frame, text='Enter weightage of Part-A:', font=("Helvetica", 14))
-no_of_questions_label.pack(pady=5)
-no_of_questions = Entry(frame, font=("Helvetica", 14))
-no_of_questions.pack(pady=5)
+subject_name_label = Label(frame, text='Enter Subject Name:', font=("Arial", 12))
+subject_name_label.grid(row=2, column=0, pady=5, sticky="e")
+subject_name_entry = Entry(frame, font=("Arial", 12))
+subject_name_entry.grid(row=2, column=1, pady=5, sticky="w")
 
-Month_Year_label = Label(frame, text='Month & Year:', font=("Helvetica", 14))
-Month_Year_label.pack(pady=5)
-Month_Year = Entry(frame, font=("Helvetica", 14))
-Month_Year.pack(pady=5)
+sub_code_label = Label(frame, text='Enter Subject Code:', font=("Arial", 12))
+sub_code_label.grid(row=3, column=0, pady=5, sticky="e")
+sub_code_entry = Entry(frame, font=("Arial", 12))
+sub_code_entry.grid(row=3, column=1, pady=5, sticky="w")
 
-Semester_label = Label(frame, text='Semester:', font=("Helvetica", 14))
-Semester_label.pack(pady=5)
-Semester = Entry(frame, font=("Helvetica", 14))
-Semester.pack(pady=5)
+Paper_code_label = Label(frame, text='Enter Paper Code:', font=("Arial", 12))
+Paper_code_label.grid(row=4, column=0, pady=5, sticky="e")
+Paper_code_entry = Entry(frame, font=("Arial", 12))
+Paper_code_entry.grid(row=4, column=1, pady=5, sticky="w")
+
+no_of_questions_label = Label(frame, text='Enter weightage of Part-A:', font=("Arial", 12))
+no_of_questions_label.grid(row=5, column=0, pady=5, sticky="e")
+no_of_questions = Entry(frame, font=("Arial", 12))
+no_of_questions.grid(row=5, column=1, pady=5, sticky="w")
+
+Month_Year_label = Label(frame, text='Month & Year:', font=("Arial", 12))
+Month_Year_label.grid(row=6, column=0, pady=5, sticky="e")
+Month_Year = Entry(frame, font=("Arial", 12))
+Month_Year.grid(row=6, column=1, pady=5, sticky="w")
+
+Semester_label = Label(frame, text='Semester:', font=("Arial", 12))
+Semester_label.grid(row=7, column=0, pady=5, sticky="e")
+Semester = Entry(frame, font=("Arial", 12))
+Semester.grid(row=7, column=1, pady=5, sticky="w")
+
+label = Label(frame, text='Choose unit :', font=("Arial", 14))
+label.grid(row=8, column=0, columnspan=2, pady=10)
 
 Unit_buttons_frame = Frame(frame)
-Unit_buttons_frame.pack(pady=20)
+Unit_buttons_frame.grid(row=9, column=0, columnspan=2)
 
-label = Label(frame, text='Choose unit :', font=("Helvetica", 18))
-label.pack(pady=10)
-
-Unit1_button = Button(Unit_buttons_frame, text='Unit 1', font=("Helvetica", 14), command=Unit1)
+Unit1_button = Button(Unit_buttons_frame, text='Unit 1', font=("Arial", 12), command=Unit1)
 Unit1_button.pack(side=LEFT, padx=5)
 
-Unit2_button = Button(Unit_buttons_frame, text='Unit 2', font=("Helvetica", 14), command=Unit2)
+Unit2_button = Button(Unit_buttons_frame, text='Unit 2', font=("Arial", 12), command=Unit2)
 Unit2_button.pack(side=LEFT, padx=5)
 
-Unit3_button = Button(Unit_buttons_frame, text='Unit 3', font=("Helvetica", 14), command=Unit3)
+Unit3_button = Button(Unit_buttons_frame, text='Unit 3', font=("Arial", 12), command=Unit3)
 Unit3_button.pack(side=LEFT, padx=5)
 
-Unit4_button = Button(Unit_buttons_frame, text='Unit 4', font=("Helvetica", 14), command=Unit4)
+Unit4_button = Button(Unit_buttons_frame, text='Unit 4', font=("Arial", 12), command=Unit4)
 Unit4_button.pack(side=LEFT, padx=5)
 
-Unit5_button = Button(Unit_buttons_frame, text='Unit 5', font=("Helvetica", 14), command=Unit5)
+Unit5_button = Button(Unit_buttons_frame, text='Unit 5', font=("Arial", 12), command=Unit5)
 Unit5_button.pack(side=LEFT, padx=5)
 
-generate_label = Label(frame, text='Which format of the question paper do you want?', font=("Helvetica", 18))
-generate_label.pack(pady=10)
+label = Label(frame, text='Which format of the question paper do you want?', font=("Arial", 14))
+label.grid(row=10, column=0, columnspan=2, pady=10)
 
-sem_button = Button(frame, text='Semester/Model', font=("Helvetica", 16), command=sem_button_callback)
-sem_button.pack(pady=10)
+sem_button = Button(frame, text='Semester/Model', font=("Arial", 12), command=sem_button_callback)
+sem_button.grid(row=11, column=0, columnspan=2, pady=5)
 
+sem_button_2021 = Button(frame, text='Semester/Model_2021', font=("Arial", 12), command=sem_2021_callback)
+sem_button_2021.grid(row=12, column=0, columnspan=2, pady=5)
 
-sem_button_2021 = Button(frame, text='Semester/Model_2021', font=("Helvetica", 16), command=sem_2021_callback)
-sem_button_2021.pack(pady=10)
+ca2_button = Button(frame, text='Generate CA question', font=("Arial", 12), command=ca2_paper_callback)
+ca2_button.grid(row=13, column=0, columnspan=2, pady=5)
 
-
-ca2_button = Button(frame, text='Generate CA question', font=("Helvetica", 16), command=ca2_paper_callback)
-ca2_button.pack(pady=10)
-
-ca2_button_2021 = Button(frame, text='Generate CA question 2021', font=("Helvetica", 16), command=ca2_paper_2021_callback)
-ca2_button_2021.pack(pady=10)
-
-# Update the scroll region to include the new widgets
-frame.update_idletasks()
-canvas.config(scrollregion=canvas.bbox("all"))
+ca2_button_2021 = Button(frame, text='Generate CA question 2021', font=("Arial", 12), command=ca2_paper_2021_callback)
+ca2_button_2021.grid(row=14, column=0, columnspan=2, pady=5)
 
 # Run the Tkinter event loop
 root.mainloop()
-
