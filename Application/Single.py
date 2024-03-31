@@ -882,6 +882,8 @@ def ca2_paper_2021(input_docx, output_docx, Paper_code, subject_name, subject_co
 # from main import sem_paper, ca2_paper
 from tkinter import *
 from tkinter import filedialog
+from tkinter import LEFT, RIGHT, TOP, BOTTOM
+from PIL import Image, ImageTk
 import os
 
 # Global variables to store inputs
@@ -1031,9 +1033,18 @@ root = Tk()
 # Set the window title
 root.title("Question Paper Generator")
 
+# Load the image file
+image_path = "./assets/Picture 1.jpg"
+image = Image.open(image_path)
+photo = ImageTk.PhotoImage(image)
+
 # Create a Frame to hold all the widgets
 frame = Frame(root)
 frame.pack(padx=20, pady=20)
+
+# Display the image at the top
+image_label = Label(frame, image=photo)
+image_label.grid(row=0, column=0, columnspan=2, pady=10)
 
 # Widgets with updated styles
 label = Label(frame, text='Select the formatted question bank', font=("Arial", 14))
