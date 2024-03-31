@@ -1047,11 +1047,11 @@ image_label = Label(frame, image=photo)
 image_label.grid(row=0, column=0, columnspan=2, pady=10)
 
 # Widgets with updated styles
-label = Label(frame, text='Select the formatted question bank', font=("Arial", 14))
-label.grid(row=0, column=0, columnspan=2, pady=10)
+label = Label(frame, text='Select question bank :', font=("Arial", 14))
+label.grid(row=1, column=0, columnspan=2, pady=10)
 
 button = Button(frame, text='Open File', font=("Arial", 12), command=openFile)
-button.grid(row=1, column=0, columnspan=2, pady=5)
+button.grid(row=1, column=1, columnspan=2, pady=5)
 
 subject_name_label = Label(frame, text='Enter Subject Name:', font=("Arial", 12))
 subject_name_label.grid(row=2, column=0, pady=5, sticky="e")
